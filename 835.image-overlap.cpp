@@ -8,6 +8,14 @@
 class Solution {
 public:
 
+    /**
+     * @brief Calculate the overlap
+     * 
+     * @param img1 changed img1
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap
+     * @param n size of the img
+     */
     void calculate(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
         int ans_tmp = 0;
         for(int i = 0; i < n; i++)
@@ -18,6 +26,15 @@ public:
             ans = ans_tmp;
     }
 
+    /**
+     * @brief move the img1 "up" and retrun the img
+     * 
+     * @param img1 change img1
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     * @return vector<vector<int>> 
+     */
     vector<vector<int>> up(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
         vector<vector<int>> img_tmp;
         for(int i = 0; i < n; i++){
@@ -35,6 +52,15 @@ public:
         return img_tmp;
     }
 
+    /**
+     * @brief move the img1 "down" and retrun the img
+     * 
+     * @param img1 change img1
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     * @return vector<vector<int>> 
+     */
     vector<vector<int>> down(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
         vector<vector<int>> img_tmp;
         for(int i = 0; i < n; i++){
@@ -52,6 +78,15 @@ public:
         return img_tmp;
     }
 
+    /**
+     * @brief move the img1 "right" and retrun the img
+     * 
+     * @param img1 change img1
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     * @return vector<vector<int>> 
+     */
     vector<vector<int>> right(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
         vector<vector<int>> img_tmp;
         for(int i = 0; i < n; i++){
@@ -69,6 +104,15 @@ public:
         return img_tmp;
     }
 
+    /**
+     * @brief move the img1 "left" and retrun the img
+     * 
+     * @param img1 change img1
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     * @return vector<vector<int>> 
+     */
     vector<vector<int>> left(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans,  int& n){
         vector<vector<int>> img_tmp;
         for(int i = 0; i < n; i++){
@@ -85,7 +129,13 @@ public:
         calculate(img_tmp, img2, ans, n);
         return img_tmp;
     }
-/*
+
+    /**
+     * @brief print the matrix
+     * 
+     * @param img img that wants to print
+     * @param n size of the img
+     */
     void print_matirx(vector<vector<int>>& img, int& n){
         cout << endl;
         for(int i = 0; i < n; i++){
@@ -95,7 +145,15 @@ public:
             }
         }
     }
-*/
+
+    /**
+     * @brief move to the first_phase (right, up)
+     * 
+     * @param img1 origin img1 from the question
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     */
     void first_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
     {
         /*right(img1, img2, ans, n);
@@ -113,6 +171,15 @@ public:
             }
         }
     }
+
+    /**
+     * @brief move to the second_phase (left, up)
+     * 
+     * @param img1 origin img1 from the question
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     */
     void second_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
     {
         /*left(img1, img2, ans, n);
@@ -130,6 +197,15 @@ public:
             }
         }
     }
+
+    /**
+     * @brief move to the third_phase (left, down)
+     * 
+     * @param img1 origin img1 from the question
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     */
     void third_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
     {
         /*left(img1, img2, ans, n);
@@ -147,6 +223,15 @@ public:
             }
         }
     }
+
+    /**
+     * @brief move to the forth_phase (right, down)
+     * 
+     * @param img1 origin img1 from the question
+     * @param img2 origin img2 from the question
+     * @param ans number of the overlap, only use at calculate function
+     * @param n size of the img
+     */
     void forth_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
     {
         vector<vector<int>> img_r;
