@@ -7,7 +7,8 @@
 // @lc code=start
 
 //#define SOLUTION_1
-#define SOLUTION_2
+//#define SOLUTION_2
+#define SOLUTION_3
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
@@ -26,6 +27,8 @@ public:
          *            2. because of the feature above, we doesn't need to compare them, we can get the
          *               data from the map directly. 
          * 
+         * Solution3: The same method, but use unordered_map.
+         *            1. Don't know WTF is 0x01e9a5f423bcd687ull, but it works.
          */
         vector<vector<string>> ans;
 
@@ -66,6 +69,21 @@ public:
             m[ch].push_back(s);
         }
         for(auto[hash, v] : m) ans.push_back(v);
+#endif
+
+#ifdef SOLUTION_3
+        unordered_map<size_t, vector<string>> m;
+        
+        for(string s:strs){
+            size_t u = 0;
+            for(char c:s){
+                const auto a = c * 0x01e9a5f423bcd687ull;
+                u += a ^ (a >> 35);
+            }
+            m[u].push_back(s);
+        }
+
+        for(auto[_, v] : m) ans.push_back(v);
 #endif
 
         return ans;
