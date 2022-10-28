@@ -35,9 +35,8 @@ public:
         for(string s:strs){
             pair<string, vector<int>> p;
             vector<int> ch(26,0);
-            for(char c:s){
-                ch[c-'a']++;
-            }
+            for(char c:s) ch[c-'a']++;
+            
             p.first = s;
             p.second = ch;
             tmp.push_back(p);
@@ -66,7 +65,7 @@ public:
             for(char c:s) ch[c-'a']++;
             m[ch].push_back(s);
         }
-        for(auto[hash, group] : m) ans.push_back(group);
+        for(auto[hash, v] : m) ans.push_back(v);
 #endif
 
         return ans;
