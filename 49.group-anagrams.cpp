@@ -29,6 +29,11 @@ public:
          * 
          * Solution3: The same method, but use unordered_map. Accpted, 77ms(49.65%), 19.7MB(72.23%)
          *            1. Don't know WTF is 0x01e9a5f423bcd687ull, but it works.
+         *            2. OK I get it, the 0x01e9a5f423bcd687ull is just a long enough number, 
+         *               we can use another number which is also long enough to change it.
+         *               And the ending "ull" means unsigned long long, can use "ULL" instead.
+         *            3. After change the number 0x01e9a5f423bcd687ull to 0x1234567891011ULL, the 
+         *               result status is become 34ms(96.69%), 19.8MB(72.23%), not sure the reason.
          */
         vector<vector<string>> ans;
 
@@ -77,7 +82,7 @@ public:
         for(string s:strs){
             size_t u = 0;
             for(char c:s){
-                const auto a = c * 0x01e9a5f423bcd687ull;
+                const auto a = c * 0x1234567891011ULL;
                 u += a ^ (a >> 35);
             }
             m[u].push_back(s);
