@@ -27,7 +27,7 @@ public:
          *            2. because of the feature above, we doesn't need to compare them, we can get the
          *               data from the map directly. 
          * 
-         * Solution3: The same method, but use unordered_map.
+         * Solution3: The same method, but use unordered_map. Accpted, 77ms(49.65%), 19.7MB(72.23%)
          *            1. Don't know WTF is 0x01e9a5f423bcd687ull, but it works.
          */
         vector<vector<string>> ans;
