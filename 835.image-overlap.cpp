@@ -7,36 +7,196 @@
 // @lc code=start
 class Solution {
 public:
-    void up(vector<vector<int>>& img1){
 
-    }
-    void down(vector<vector<int>>& img1){
-
-    }
-    void right(vector<vector<int>>& img1){
-
-    }
-    void left(vector<vector<int>>& img1){
-
-    }
-
-    void moving(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans){
+    void calculate(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
         int ans_tmp = 0;
-        for(int i = 0; i < img1.size(); i++){
-            for(int j = 0; j < img1[0].size(); i++){
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
                 if(img1[i][j] == 1 && img2[i][j] == 1)
                     ans_tmp++;
+        if(ans < ans_tmp)
+            ans = ans_tmp;
+    }
+
+    vector<vector<int>> up(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
+        vector<vector<int>> img_tmp;
+        for(int i = 0; i < n; i++){
+            vector<int> tmp;
+            for(int j = 0; j < n; j++){
+                if(i == n-1){
+                    tmp.push_back(0);
+                }else{
+                    tmp.push_back(img1[i+1][j]);
+                }
+            }
+            img_tmp.push_back(tmp);
+        }
+        calculate(img_tmp, img2, ans, n);
+        return img_tmp;
+    }
+
+    vector<vector<int>> down(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
+        vector<vector<int>> img_tmp;
+        for(int i = 0; i < n; i++){
+            vector<int> tmp;
+            for(int j = 0; j < n; j++){
+                if(i == 0){
+                    tmp.push_back(0);
+                }else{
+                    tmp.push_back(img1[i-1][j]);
+                }
+            }
+            img_tmp.push_back(tmp);
+        }
+        calculate(img_tmp, img2, ans, n);
+        return img_tmp;
+    }
+
+    vector<vector<int>> right(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n){
+        vector<vector<int>> img_tmp;
+        for(int i = 0; i < n; i++){
+            vector<int> tmp;
+            for(int j = 0; j < n; j++){
+                if(j == 0){
+                    tmp.push_back(0);
+                }else{
+                    tmp.push_back(img1[i][j-1]);
+                }
+            }
+            img_tmp.push_back(tmp);
+        }
+        calculate(img_tmp, img2, ans, n);
+        return img_tmp;
+    }
+
+    vector<vector<int>> left(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans,  int& n){
+        vector<vector<int>> img_tmp;
+        for(int i = 0; i < n; i++){
+            vector<int> tmp;
+            for(int j = 0; j < n; j++){
+                if(j == n-1){
+                    tmp.push_back(0);
+                }else{
+                    tmp.push_back(img1[i][j+1]);
+                }
+            }
+            img_tmp.push_back(tmp);
+        }
+        calculate(img_tmp, img2, ans, n);
+        return img_tmp;
+    }
+/*
+    void print_matirx(vector<vector<int>>& img, int& n){
+        cout << endl;
+        for(int i = 0; i < n; i++){
+            cout << endl;
+            for(int j = 0; j < n; j++){
+                cout << img[i][j] << ",";
             }
         }
+    }
+*/
+    void first_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
+    {
+        /*right(img1, img2, ans, n);
+        up(img1, img2, ans, n);*/
 
-        if(ans < ans_tmp){
-            ans = ans_tmp;
+        vector<vector<int>> img_r;
+        img_r = img1;
+        for(int i = 0; i < n-1; i++){
+            img_r = right(img_r, img2, ans, n);
+            vector<vector<int>> img_d;
+            img_d = img_r;
+            for(int j = 0; j < n-1; j++){
+                //print_matirx(img_d, n);
+                img_d = up(img_d, img2, ans, n);
+            }
+        }
+    }
+    void second_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
+    {
+        /*left(img1, img2, ans, n);
+        up(img1, img2, ans, n);*/
+
+        vector<vector<int>> img_r;
+        img_r = img1;
+        for(int i = 0; i < n-1; i++){
+            img_r = up(img_r, img2, ans, n);
+            vector<vector<int>> img_d;
+            img_d = img_r;
+            for(int j = 0; j < n-1; j++){
+                //print_matirx(img_d, n);
+                img_d = left(img_d, img2, ans, n);
+            }
+        }
+    }
+    void third_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
+    {
+        /*left(img1, img2, ans, n);
+        down(img1, img2, ans, n);*/
+
+        vector<vector<int>> img_r;
+        img_r = img1;
+        for(int i = 0; i < n-1; i++){
+            img_r = left(img_r, img2, ans, n);
+            vector<vector<int>> img_d;
+            img_d = img_r;
+            for(int j = 0; j < n-1; j++){
+                //print_matirx(img_d, n);
+                img_d = down(img_d, img2, ans, n);
+            }
+        }
+    }
+    void forth_phase(vector<vector<int>>& img1, vector<vector<int>>& img2, int& ans, int& n)
+    {
+        vector<vector<int>> img_r;
+        img_r = img1;
+        for(int i = 0; i < n-1; i++){
+            img_r = down(img_r, img2, ans, n);
+            vector<vector<int>> img_d;
+            img_d = img_r;
+            for(int j = 0; j < n-1; j++){
+                //print_matirx(img_d, n);
+                img_d = right(img_d, img2, ans, n);
+            }
         }
     }
 
     int largestOverlap(vector<vector<int>>& img1, vector<vector<int>>& img2) {
-        int ans;
-        moving(img1, img2, ans);
+        /**
+         * @brief 
+         * Solution1: Move the img1 driectly
+         * 1. tree: many duplicate results, time complexity = O(2^n)
+         * 2. matrix: (1) TLE, 58/59 cases passed (N/A)
+         *            (2) Accepted, 2260ms(5.56%), 527.9MB(6.94%) -> Doesn't change anything, 
+         *                but it just accecpted. (only one time)
+         *            because the duplicate result is in a predictable range, 
+         *            we should just compute the possible result instead of moving it in real way. 
+         *            It cost 2N+2 to move horizontal, and 2N+2 to move vertical.
+         *            And when we want to calculate the ans, it cost n^2.
+         *            Therefore, the time complexity is O(n^4).
+         *            It cost a lots of time, and it seems cost a lots of space.
+         * 
+         * 
+         */
+        int ans = 0;
+        int n = img1.size();
+        // calculate the origin 
+        calculate(img1, img2, ans, n);
+        //cout << ans << endl;
+        //cout << "first phase";
+        first_phase(img1, img2, ans, n);
+        //cout << ans << endl;
+        //cout << "\n\nsecond phase";
+        second_phase(img1, img2, ans, n);
+        //cout << ans << endl;
+        //cout << "\n\nthird phase";
+        third_phase(img1, img2, ans, n);
+        //cout << ans << endl;
+        //cout << "\n\nforth phase";
+        forth_phase(img1, img2, ans, n);
+        //cout << ans << endl;
+
 
         return ans;
     }
