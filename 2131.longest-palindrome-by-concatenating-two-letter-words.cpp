@@ -23,10 +23,11 @@ public:
     int longestPalindrome(vector<string>& words) {
         /**
          * @brief 
-         * Solution: Greedy
+         * Solution: Greedy, Find the reverse word instead of actually arrange them.
          * Accepted, 1208ms(17.01%), 167.9MB(60%).
-         * 1. Count the word in words, and record the number of them with map.
-         * 2. if there is a reverse word in the record map, ans+4, map[w]-1, map[m]-1
+         * 
+         * 1. Count the word in vector, and record the number of them with map.
+         * 2. If there is a reverse word in the record map, ans+4, map[w]-1, map[m]-1
          * 3. After step 2, if there is a palindrome string in the map, ans+=2, and it is the answer.
          * 
          */
