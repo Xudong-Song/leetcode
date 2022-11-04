@@ -11,7 +11,8 @@ public:
         /**
          * @brief trailing(在後面、尾隨)
          * 
-         * Solution: Time Complexity: O(logˇ5N)
+         * Solution: 0! = 1, don't worry. 
+         *           Time Complexity: O(logˇ5N)
          *           Accetped, 0ms(100%), 6MB(29.03%)
          * 1. All 0 trailing should comes from 10.
          * 2. Therefore, we can count how many 5 we has meet.
