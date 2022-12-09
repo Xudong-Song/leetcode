@@ -18,22 +18,23 @@ public:
          * Accepted: 138ms(79.85%), 21MB(10.04%)
          * 
          */
-        map<char, int> m1;
-        map<char, int> m2;
+        map<char, int> m1, m2;
+        vector<char> v1_c, v2_c;
+        vector<int> v1_i, v2_i;
+
         for(auto w: word1) m1[w]++; // O(n)
         for(auto w: word2) m2[w]++; // O(m)
-        vector<char> v1_c;
-        vector<int> v1_i;
+
         for(auto m: m1){ // O(1)
             v1_c.push_back(m.first);
             v1_i.push_back(m.second);
         }
-        vector<char> v2_c;
-        vector<int> v2_i;
+
         for(auto m: m2){ // O(1)
             v2_c.push_back(m.first);
             v2_i.push_back(m.second);
         }
+        
         sort(v1_c.begin(), v1_c.end()); // O(logn)
         sort(v1_i.begin(), v1_i.end()); // O(logn)
         sort(v2_c.begin(), v2_c.end()); // O(logm)
