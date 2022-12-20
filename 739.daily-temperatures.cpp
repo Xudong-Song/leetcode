@@ -14,8 +14,8 @@ public:
          * Time Complexity: O(n^2)
          * Accepted: 254ms(67.96%), 103MB(49.03%)
          * 1. Push the index into the stack every loop.
-         * 2. If there is a bigger number, pop it and record the diff between
-         *    stack top and index now.
+         * 2. If there is a bigger number, pop it and record the diff 
+         *    between stack top and index now.
          * 
          */
         vector<int> ans(t.size(), 0);
