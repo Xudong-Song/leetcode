@@ -19,7 +19,11 @@ public:
          * 2. Search the queries from tmp list.
          * 
          * Optimizied:
-         * 1. Binary Search (upper_bound)
+         * 1. Binary Search (upper_bound): This function will return
+         *    the first address of the bigger or equal number of the
+         *    target in the sorted list.
+         *    upper_bound(sorted.begin(), sorted.end(), target)
+         * 
          *    Time Complexity: O(nlogn + mlogn)
          *    Accepted: 19ms(75.38%), 13.8MB(37.34%)
          * 
